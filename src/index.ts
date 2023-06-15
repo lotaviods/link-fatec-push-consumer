@@ -4,12 +4,12 @@ import amqplib from 'amqplib/callback_api';
 import { sendMessage } from "./service/fcm_service";
 import { Message } from "message";
 
+console.info(`[${new Date().toISOString()}] [Consumer] Started!`);
 
 startConsumer(async (msg: amqplib.Message | null, ch: amqplib.Channel) => {
-        console.log('[Consumer] Started!')
         try {
             let json = JSON.parse(msg?.content.toString()!!)
-            console.log(`[x] Message received: %s to user ${json.to}`, `${json.message}`)
+            console.log(`[${new Date().toISOString()}] [Message received]: %s to user ${json.to}`, `${json.message}`)
 
             const message: Message = {
                 token_device: json.to,

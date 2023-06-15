@@ -17,11 +17,11 @@ export function startConsumer(callback: (msg: amqplib.Message | null, channel: a
 
   amqplib.connect(`${url}`, (err: any, conn: amqplib.Connection) => {
     if (err) throw err;
-
+    console.info(`[${new Date().toISOString()}] [Consumer] Connected!`);
     conn.createChannel((err, ch) => {
       if (err) throw err;
       ch.assertQueue(queue)
-
+      console.info(`[${new Date().toISOString()}] [Consumer] Ready for messages!`);
       ch.consume(`${queue}`, (msg: amqplib.Message | null) => {
         try {
           callback(msg, ch)

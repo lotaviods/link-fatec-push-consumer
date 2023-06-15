@@ -51,5 +51,8 @@ WORKDIR /usr/src/app
 
 COPY . .
 
+RUN npm install pm2 -g \
+    && npm install -g ts-node
+
 CMD ["sh", "/usr/src/app/entrypoint.sh"]
 
